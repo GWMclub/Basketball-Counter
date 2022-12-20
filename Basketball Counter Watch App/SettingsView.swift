@@ -2,11 +2,13 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var counters: Counters
-    @State private var showingResetConfirmation = false
-    @State private var startingTimer = false
+    
+    @State private var isShownResetCountersAlert = false
+    @State private var isShownResetTimerAlert = false
 
-    @State var timeRemaining = 900
-    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var isStartsTimer = false
+    @State private var timeRemaining = 900
+    private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -14,27 +16,34 @@ struct SettingsView: View {
                 .font(.title)
                 .bold()
             .onReceive(timer) { _ in
-                if timeRemaining > 0 && startingTimer {
+                if timeRemaining > 0 && isStartsTimer {
                     timeRemaining -= 1
                 }
             }
             Button(action: {
-                startingTimer.toggle()
+                isStartsTimer.toggle()
             }) {
-                startingTimer ? Text("Pause timer") : Text("Start timer")
+                isStartsTimer ? Text("Pause timer") : Text("Start timer")
             }
             Button(action: {
-                timeRemaining = 900
+                isShownResetTimerAlert = true
             }) {
                 Text("Reset timer")
             }
-            
+            .alert(isPresented: $isShownResetTimerAlert) {
+                Alert(
+                    title: Text("Reset Timer"),
+                    message: Text("Are you sure you want to reset timer?"),
+                    primaryButton: .destructive(Text("Reset"), action: { resetTimer() }),
+                    secondaryButton: .cancel()
+                )
+            }
             Button(action: {
-                showingResetConfirmation = true
+                isShownResetCountersAlert = true
             }) {
                 Text("Reset counters")
             }
-            .alert(isPresented: $showingResetConfirmation) {
+            .alert(isPresented: $isShownResetCountersAlert) {
                 Alert(
                     title: Text("Reset Counters"),
                     message: Text("Are you sure you want to reset both counters?"),
@@ -45,7 +54,12 @@ struct SettingsView: View {
         }
     }
     
-    func getTime(from seconds: Int) -> String {
+    private func resetTimer() {
+        isStartsTimer = false
+        timeRemaining = 900
+    }
+    
+    private func getTime(from seconds: Int) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.zeroFormattingBehavior = .pad
