@@ -1,5 +1,19 @@
 import SwiftUI
 
+enum PointsButton {
+    case plusOne
+    case plusTwo
+    case plusThree
+    
+    var description: String {
+        switch self {
+            case .plusOne: return "+1"
+            case .plusTwo: return "+2"
+            case .plusThree: return "+3"
+        }
+    }
+}
+
 struct MainView: View {
     @EnvironmentObject private var counters: Counters
 
@@ -11,29 +25,25 @@ struct MainView: View {
             Spacer()
             HStack {
                 VStack {
-                    Button(action: {
-                        counters.count1 += 2
-                    }) {
-                        Text("+2")
-                    }
-                    Button(action: {
-                        counters.count1 += 3
-                    }) {
-                        Text("+3")
-                    }
+                    makeButton(.plusOne, action: { counters.count1 += 1 })
+                    makeButton(.plusTwo, action: { counters.count1 += 2 })
+                    makeButton(.plusThree, action: { counters.count1 += 3 })
                 }
                 VStack {
-                    Button(action: {
-                        counters.count2 += 2
-                    }) {
-                        Text("+2")
-                    }
-                    Button(action: {
-                        counters.count2 += 3
-                    }) {
-                        Text("+3")
-                    }
+                    makeButton(.plusOne, action: { counters.count2 += 1 })
+                    makeButton(.plusTwo, action: { counters.count2 += 2 })
+                    makeButton(.plusThree, action: { counters.count2 += 3 })
                 }
+            }
+        }
+    }
+    
+    private func makeButton(_ pointsButton: PointsButton, action: @escaping () -> ()) -> some View {
+        Group {
+            Button(action: {
+                action()
+            }) {
+                Text(pointsButton.description)
             }
         }
     }
