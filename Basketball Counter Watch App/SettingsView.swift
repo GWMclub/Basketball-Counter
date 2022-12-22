@@ -1,8 +1,11 @@
 import SwiftUI
+import HealthKit
 
 struct SettingsView: View {
     @EnvironmentObject private var counters: Counters
     
+    @State private var session: HKWorkoutSession?
+
     @State private var isShownResetCountersAlert = false
     @State private var isShownResetTimerAlert = false
 
@@ -22,6 +25,11 @@ struct SettingsView: View {
             }
             Button(action: {
                 isStartsTimer.toggle()
+                if isStartsTimer {
+                    startWorkout()
+                } else {
+                    stopWorkout()
+                }
             }) {
                 isStartsTimer ? Text("Pause timer") : Text("Start timer")
             }
@@ -52,6 +60,23 @@ struct SettingsView: View {
                 )
             }
         }
+    }
+    
+    // Нужно, чтобы часы держали приложение на главном потомке и сворачивали в трей
+    private func startWorkout() {
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .basketball
+        do {
+            let healthStore = HKHealthStore()
+            self.session = try HKWorkoutSession(healthStore: healthStore, configuration: configuration)
+            self.session?.startActivity(with: Date())
+        } catch {
+            print("Error starting workout: \(error.localizedDescription)")
+        }
+    }
+    
+    private func stopWorkout() {
+        session?.stopActivity(with: Date())
     }
     
     private func resetTimer() {

@@ -21,6 +21,8 @@
 		FD7B03A22951A28300B1964B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD7B03B02951AE6E00B1964B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FD7B03B42951B0C400B1964B /* Counters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counters.swift; sourceTree = "<group>"; };
+		FDEB5B112951C874009C8737 /* Basketball-Counter-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Basketball-Counter-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FDEB5B142951CEAB009C8737 /* Basketball Counter Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Basketball Counter Watch App.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,8 @@
 		FD7B039D2951A28200B1964B /* Basketball Counter Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				FDEB5B142951CEAB009C8737 /* Basketball Counter Watch App.entitlements */,
+				FDEB5B112951C874009C8737 /* Basketball-Counter-Watch-App-Info.plist */,
 				FD7B039E2951A28200B1964B /* WatchApp.swift */,
 				FD7B03A02951A28200B1964B /* MainView.swift */,
 				FD7B03B02951AE6E00B1964B /* SettingsView.swift */,
@@ -257,11 +261,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Basketball Counter Watch App/Basketball Counter Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7AZ625QQ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Basketball-Counter-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Basketball Counter";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -286,11 +292,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Basketball Counter Watch App/Basketball Counter Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7AZ625QQ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Basketball-Counter-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Basketball Counter";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
