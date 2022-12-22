@@ -62,7 +62,7 @@ struct SettingsView: View {
         }
     }
     
-    // Нужно, чтобы часы держали приложение на главном потомке и сворачивали в трей
+    // Нужно, чтобы часы держали приложение на главном потоке и сворачивали апку в трей
     private func startWorkout() {
         let configuration = HKWorkoutConfiguration()
         configuration.activityType = .basketball
